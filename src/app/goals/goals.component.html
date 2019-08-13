@@ -1,0 +1,22 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <div class="container">
+    <h1>
+      This Are My Goals {{ title }}!
+    </h1>
+  </div>
+  <br><br>
+  <div class="container-fluid">
+      <div *ngFor='let goal of goals;let i = index'>
+        <h4 appStrikethrough>{{goal.id}}. {{goal.name}} (Due on{{goal.completeDate|date|uppercase}})</h4>
+
+        <button class="btn btn-primary" (click)='showDescription(i)'>Description</button>
+        
+        <app-goalsdetails *ngIf='goal.showDescription'  [goal]='goal' (completeGoal) = 'toDelete($event, i)' ></app-goalsdetails>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <br><br>
+    <app-goalsform (addGoal)="submitGoal($event)"></app-goalsform>
+  </div>
+</div>
